@@ -27,6 +27,7 @@ class GameGrid(Frame):
             c.KEY_DOWN_ALT2: logic.down,
             c.KEY_LEFT_ALT2: logic.left,
             c.KEY_RIGHT_ALT2: logic.right,
+            'v': self.make_random_cell_empty,
         }
 
         self.grid_cells = []
@@ -109,5 +110,13 @@ class GameGrid(Frame):
         while self.matrix[index[0]][index[1]] != 0:
             index = (gen(), gen())
         self.matrix[index[0]][index[1]] = 2
+
+    def make_random_cell_empty(self, matrix):
+        # 무작위 1개의 칸을 선택.
+        row = random.randint(0, c.GRID_LEN - 1)
+        col = random.randint(0, c.GRID_LEN - 1)
+        # 선택된 칸을 2로 초기화
+        matrix[row][col] = 0
+        return matrix, True
 
 game_grid = GameGrid()
